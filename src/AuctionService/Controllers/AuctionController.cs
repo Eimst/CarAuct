@@ -74,7 +74,7 @@ public class AuctionController(AuctionDbContext context, IMapper mapper) : Contr
 
         if (await context.SaveChangesAsync() == 0)
         {
-            return BadRequest("Couldn't update auction");
+            return BadRequest("Couldn't update the auction");
         }
         
         return NoContent();
