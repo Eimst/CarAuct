@@ -15,4 +15,5 @@ public class MappingProfiles : Profile
                 o.MapFrom(s => s));
         CreateMap<CreateAuctionDto, Item>();
     }
+    
 }

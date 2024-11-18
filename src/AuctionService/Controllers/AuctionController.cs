@@ -2,6 +2,7 @@ using AuctionService.Data;
 using AuctionService.DTOs;
 using AuctionService.Entities;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,14 +13,16 @@ namespace AuctionService.Controllers;
 public class AuctionController(AuctionDbContext context, IMapper mapper) : ControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AuctionDto>>> GetAllAuctions()
+    public async Task<ActionResult<IEnumerable<AuctionDto>>> GetAllAuctions(string? date)
     {
-        var auctions = await context.Auctions
-            .Include(x => x.Item)
-            .OrderBy(x => x.Item.Make)
-            .ToListAsync();
+        var query = context.Auctions.OrderBy(a => a.Item.Make).AsQueryable();
 
-        return mapper.Map<List<AuctionDto>>(auctions);
+        if (!string.IsNullOrWhiteSpace(date))
+        {
+            query = query.Where(x => x.UpdatedAt.CompareTo(DateTime.Parse(date).ToUniversalTime()) >= 0);
+        }
+
+        return await query.ProjectTo<AuctionDto>(mapper.ConfigurationProvider).ToListAsync();
     }
 
     [HttpGet("{id:guid}")]
@@ -57,15 +60,15 @@ public class AuctionController(AuctionDbContext context, IMapper mapper) : Contr
     [HttpPut("{id:guid}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
-        var auction = await context.Auctions.Include(x=> x.Item).FirstOrDefaultAsync(x => x.Id == id);
+        var auction = await context.Auctions.Include(x => x.Item).FirstOrDefaultAsync(x => x.Id == id);
 
         if (auction == null)
         {
             return NotFound();
         }
-        
+
         // Todo: seller name == auction
-        
+
         auction.Item.Make = updateAuctionDto.Make ?? auction.Item.Make;
         auction.Item.Model = updateAuctionDto.Model ?? auction.Item.Model;
         auction.Item.Color = updateAuctionDto.Color ?? auction.Item.Color;
@@ -76,7 +79,7 @@ public class AuctionController(AuctionDbContext context, IMapper mapper) : Contr
         {
             return BadRequest("Couldn't update the auction");
         }
-        
+
         return NoContent();
     }
 
@@ -84,19 +87,19 @@ public class AuctionController(AuctionDbContext context, IMapper mapper) : Contr
     public async Task<ActionResult> DeleteAuction(Guid id)
     {
         var auction = await context.Auctions.FirstOrDefaultAsync(x => x.Id == id);
-        
+
         if (auction == null)
             return NotFound();
-        
+
         // Todo: seller name == auction
-        
+
         context.Auctions.Remove(auction);
 
         if (await context.SaveChangesAsync() == 0)
         {
             return BadRequest("Couldn't delete auction");
         }
-        
+
         return NoContent();
     }
 }
