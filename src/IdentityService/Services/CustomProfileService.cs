@@ -18,10 +18,14 @@ public class CustomProfileService(UserManager<ApplicationUser> manager) : IProfi
             var existingClaims = await manager.GetClaimsAsync(user);
             var claims = new List<Claim>
             {
-                new("username", user.UserName!),
+                new Claim("username", user.UserName ?? string.Empty),
             };
             context.IssuedClaims.AddRange(claims);
-            context.IssuedClaims.Add(existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name)!);
+            var nameClaim = existingClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name);
+            if (nameClaim != null)
+            {
+                context.IssuedClaims.Add(nameClaim);
+            }
         }
         
         

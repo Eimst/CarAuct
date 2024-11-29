@@ -45,7 +45,7 @@ public class Index(UserManager<ApplicationUser> userManager) : PageModel
 
             if (result.Succeeded)
             {
-                await userManager.AddClaimsAsync(user, new List<Claim>()
+                await userManager.AddClaimsAsync(user, new List<Claim>
                 {
                     new(ClaimTypes.Name, Input.FullName),
 

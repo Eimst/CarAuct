@@ -21,7 +21,10 @@ public class SearchController : ControllerBase
 
         query = searchParams.OrderBy switch
         {
-            "make" => query.Sort(x => x.Ascending(i => i.Make)),
+            "make" => query
+                .Sort(x => x.Ascending(i => i.Make))
+                .Sort(x => x.Ascending(i => i.Model)),
+            
             "new" => query.Sort(x => x.Descending(i => i.CreatedAt)),
             _ => query.Sort(x => x.Ascending(i => i.AuctionEnd)),
         };
@@ -38,12 +41,12 @@ public class SearchController : ControllerBase
         {
             query.Match(x => x.Seller == searchParams.Seller);
         }
-        
+
         if (!string.IsNullOrEmpty(searchParams.Winner))
         {
             query.Match(x => x.Winner == searchParams.Winner);
         }
-        
+
         query.PageNumber(searchParams.PageNumber);
         query.PageSize(searchParams.PageSize);
 
