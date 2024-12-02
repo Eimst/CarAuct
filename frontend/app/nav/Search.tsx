@@ -12,6 +12,7 @@ const Search = () => {
     const router = useRouter()
     const pathName = usePathname()
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onChange = (event: any) => {
         setSearchValue(event.target.value);
     }
@@ -25,6 +26,7 @@ const Search = () => {
     return (
         <div className='flex w-[50%] items-center border-2 rounded-full py-2 shadow-sm'>
             <input
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onKeyDown={(e: any) => {
                     if (e.key === 'Enter') {
                         search()
@@ -34,8 +36,7 @@ const Search = () => {
                 onChange={onChange}
                 type="text"
                 placeholder='Search for cars'
-                className='flex-grow pl-5 bg-transparent focus:outline-none border-transparent focus:border-transparent
-                   focus:ring-0 text-sm text-gray-600'/>
+                className='input-custom'/>
             <button
                 onClick={search}
             >

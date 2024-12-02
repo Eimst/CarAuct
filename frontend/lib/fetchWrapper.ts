@@ -21,7 +21,6 @@ const post = async (url: string, body: {}) => {
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-
     return handleResponse(response);
 }
 
@@ -61,14 +60,20 @@ async function getHeaders() {
 
 async function handleResponse(response: Response) {
     const text = await response.text();
-    const data = text && JSON.parse(text);
+    let data;
+    try {
+        data = text && JSON.parse(text);
+    }
+    catch (error) {
+        data = text;
+    }
 
     if (response.ok) {
         return data || response.status;
     } else {
         const error = {
             status: response.status,
-            message: response.statusText,
+            message: typeof data === 'string' ? data : response.statusText,
         }
 
         return {error};
