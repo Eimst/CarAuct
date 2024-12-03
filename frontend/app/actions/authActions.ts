@@ -12,7 +12,7 @@ export async function getCurrentUser() {
         }
 
         return session.user
-    } catch (error) {
+    } catch {
         return null
     }
 }

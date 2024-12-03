@@ -6,6 +6,7 @@ import {Button} from "flowbite-react";
 
 const AuthTest = () => {
     const [loading, setLoading] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [result, setResult] = useState<any>();
 
     const doUpdate = () => {

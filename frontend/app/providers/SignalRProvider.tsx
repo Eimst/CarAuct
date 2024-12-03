@@ -15,9 +15,10 @@ import AuctionFinishedToast from "@/app/components/AuctionFinishedToast";
 type Props = {
     children: ReactNode
     user: User | null
+    notifyUrl: string
 }
 
-function SignalRProvider({children, user}: Props) {
+function SignalRProvider({children, user, notifyUrl}: Props) {
     const connection = useRef<HubConnection | null>(null);
     const setCurrentPrice = useAuctionStore(state => state.setCurrentPrice);
     const addBid = useBidStore(state => state.addBid);
@@ -57,7 +58,7 @@ function SignalRProvider({children, user}: Props) {
     useEffect(() => {
         if (!connection.current) {
             connection.current = new HubConnectionBuilder()
-                .withUrl('http://localhost:6001/notifications')
+                .withUrl(notifyUrl)
                 .withAutomaticReconnect()
                 .build();
 
@@ -74,7 +75,7 @@ function SignalRProvider({children, user}: Props) {
             connection.current?.off('AuctionCreated', handleAuctionCreated);
             connection.current?.off('AuctionFinished', handleAuctionFinished);
         }
-    }, [setCurrentPrice, handleBidPlaced, handleAuctionCreated, handleAuctionFinished]);
+    }, [setCurrentPrice, handleBidPlaced, handleAuctionCreated, handleAuctionFinished, notifyUrl]);
 
     return (
         children

@@ -24,6 +24,7 @@ function DeleteButton({id}: Props) {
 
             router.push("/")
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         }).catch((error: any) => {
             toast.error(`${error.status} ${error.message}`);
         }).finally(() => setLoading(false));

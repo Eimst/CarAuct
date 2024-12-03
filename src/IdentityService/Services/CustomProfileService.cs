@@ -28,7 +28,6 @@ public class CustomProfileService(UserManager<ApplicationUser> manager) : IProfi
             }
         }
         
-        
     }
 
     public Task IsActiveAsync(IsActiveContext context)

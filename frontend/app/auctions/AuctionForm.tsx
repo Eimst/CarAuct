@@ -9,7 +9,6 @@ import {createAuction, updateAuction} from "@/app/actions/auctionAction";
 import {usePathname, useRouter} from "next/navigation";
 import toast from "react-hot-toast";
 import {Auction} from "@/types";
-import {Simulate} from "react-dom/test-utils";
 
 
 type Props = {
@@ -31,7 +30,7 @@ const AuctionForm = ({auction}: Props) => {
             reset({make, model, color, mileage, year})
         }
         setFocus('make')
-    }, [setFocus])
+    }, [setFocus, auction, reset])
 
     const onSubmit = async (data: FieldValues) => {
         try {
@@ -52,7 +51,7 @@ const AuctionForm = ({auction}: Props) => {
             }
             router.push(`/auctions/details/${id}`)
 
-
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (error: any) {
             toast.error(`${error.status} ${error.message}`);
         }

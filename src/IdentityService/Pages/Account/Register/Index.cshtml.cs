@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using IdentityModel;
 using IdentityService.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -47,7 +48,7 @@ public class Index(UserManager<ApplicationUser> userManager) : PageModel
             {
                 await userManager.AddClaimsAsync(user, new List<Claim>
                 {
-                    new(ClaimTypes.Name, Input.FullName),
+                    new(JwtClaimTypes.Name, Input.FullName),
 
                 });
                 RegisterSuccess = true;

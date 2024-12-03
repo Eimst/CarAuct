@@ -10,9 +10,13 @@ import DeleteButton from "@/app/auctions/details/[id]/DeleteButton";
 import BidList from "@/app/auctions/details/[id]/BidList";
 
 
-const Details = async ({ params }: { params: { id: string } }) => {
-    params = await params;
-    const data = await getDetailViewData(params.id);
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
+
+const Details = async ({ params }: PageProps) => {
+    const resolvedParams = await params;
+    const data = await getDetailViewData(resolvedParams.id);
     const user = await getCurrentUser();
 
     return (
