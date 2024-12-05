@@ -19,6 +19,12 @@ spec:
         - name: identity-svc
           image: eimsut/identity-svc
           imagePullPolicy: Never
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: identity-secret
+                  key: connString
           envFrom:
             - configMapRef:
                 name: identity-svc-config
