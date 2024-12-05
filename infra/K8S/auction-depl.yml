@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: auction-svc
-          image: eimsut/auction-svc
+          image: sutkaitis/auction-svc
           imagePullPolicy: Never
           env:
             - name: ConnectionStrings__DefaultConnection

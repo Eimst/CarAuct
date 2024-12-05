@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: search-svc
-          image: eimsut/search-svc
+          image: sutkaitis/search-svc
           imagePullPolicy: Never
           env:
             - name: ConnectionStrings__MongoDbConnection
