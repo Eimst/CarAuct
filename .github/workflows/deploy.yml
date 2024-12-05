@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         service:
-          - name: 'eimst/auction-svc'
+          - name: 'eimsut/auction-svc'
             path: 'src/AuctionService'
             
     steps:
