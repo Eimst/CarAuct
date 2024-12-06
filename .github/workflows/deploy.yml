@@ -16,7 +16,7 @@ jobs:
           - name: 'sutkaitis/search-svc'
             path: 'src/SearchService'
           - name: 'sutkaitis/bid-svc'
-            path: 'src/BidddingService'
+            path: 'src/BiddingService'
           - name: 'sutkaitis/identity-svc'
             path: 'src/IdentityService'
           - name: 'sutkaitis/gateway-svc'
