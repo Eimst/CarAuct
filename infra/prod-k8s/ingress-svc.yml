@@ -6,14 +6,9 @@ metadata:
     name: ingress-svc
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - app.carsties.local
-        - id.carsties.local
-        - api.carsties.local
-      secretName: carsties-app-tls
+
   rules:
-    - host: app.carsties.local
+    - host: app.carauct.click
       http:
         paths:
           - path: /
@@ -23,7 +18,7 @@ spec:
                 name: webapp-clusterip
                 port:
                   number: 3000
-    - host: api.carsties.local
+    - host: api.carauct.click
       http:
         paths:
           - path: /
@@ -33,7 +28,7 @@ spec:
                 name: gateway-clusterip
                 port:
                   number: 80
-    - host: id.carsties.local
+    - host: id.carauct.click
       http:
         paths:
           - path: /
