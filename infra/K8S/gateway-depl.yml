@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
         - name: gateway-svc
-          image: sutkaitis/gateway-svc
-          imagePullPolicy: Never
+          image: sutkaitis/gateway-svc:latest
           envFrom:
             - configMapRef:
                 name: gateway-svc-config
