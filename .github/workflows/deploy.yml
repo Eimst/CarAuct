@@ -13,6 +13,19 @@ jobs:
         service:
           - name: 'sutkaitis/auction-svc'
             path: 'src/AuctionService'
+          - name: 'sutkaitis/search-svc'
+            path: 'src/SearchService'
+          - name: 'sutkaitis/bid-svc'
+            path: 'src/BidService'
+          - name: 'sutkaitis/identity-svc'
+            path: 'src/IdentityService'
+          - name: 'sutkaitis/gateway-svc'
+            path: 'src/GatewayService'
+          - name: 'sutkaitis/notify-svc'
+            path: 'src/NotificationService'
+          - name: 'sutkaitis/web-app'
+            path: 'frontend'
+        
             
     steps:
       - name: Checkout code
