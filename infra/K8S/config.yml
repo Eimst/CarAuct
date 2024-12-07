@@ -45,7 +45,7 @@ metadata:
 data:
   ASPNETCORE_URLS: "http://+:80"
   "IdentityServiceUrl": "http://identity-clusterip"
-  "ClientApp": "https://app.carsties.local"
+  "ClientApp": "https://app.carauct.click"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -53,8 +53,8 @@ metadata:
   name: identity-svc-config
 data:
   ASPNETCORE_URLS: "http://+:80"
-  IssuerUri: "https://id.carsties.local"
-  ClientApp: "https://app.carsties.local"
+  IssuerUri: "https://id.carauct.click"
+  ClientApp: "https://app.carauct.click"
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -62,11 +62,11 @@ metadata:
   name: webapp-svc-config
 data:
   API_URL: "http://gateway-clusterip/"
-  ID_URL: "https://id.carsties.local"
+  ID_URL: "https://id.carauct.click"
   ID_URL_INTERNAL: "http://identity-clusterip"
-  AUTH_URL: "https://app.carsties.local"
+  AUTH_URL: "https://app.carauct.click"
   AUTH_URL_INTERNAL: "http://webapp-clusterip:3000"
-  NOTIFY_URL: "https://api.carsties.local/notifications"
+  NOTIFY_URL: "https://api.carauct.click/notifications"
   
   
   
