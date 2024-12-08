@@ -18,6 +18,7 @@ spec:
       containers:
         - name: identity-svc
           image: sutkaitis/identity-svc:latest
+          imagePullPolicy: Always
           env:
             - name: ConnectionStrings__DefaultConnection
               valueFrom:

@@ -53,6 +53,14 @@ public class Index(UserManager<ApplicationUser> userManager) : PageModel
                 });
                 RegisterSuccess = true;
             }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                RegisterSuccess = false;
+            }
         }
         return Page();
     }

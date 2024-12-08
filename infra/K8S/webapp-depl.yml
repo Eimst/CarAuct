@@ -18,6 +18,7 @@ spec:
       containers:
         - name: webapp-svc
           image: sutkaitis/web-app:latest
+          imagePullPolicy: Always
           env:
             - name: AUTH_SECRET
               valueFrom:
