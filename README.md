@@ -22,7 +22,7 @@ A **car auction platform** with **real-time bidding** using **SignalR**. Users c
 
 ## 🛠 Tech Stack
 
-- **Backend**: C#, ASP.NET, MongoDB, PostgreSQL 
+- **Backend**: C#, ASP.NET Core Web API, MongoDB, PostgreSQL 
 - **Frontend**: Next.js, TypeScript
 - **Real-Time Communication**: SignalR for live bidding
 - **Message Broker**: RabbitMQ for microservices communication
