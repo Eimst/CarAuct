@@ -18,6 +18,7 @@ spec:
       containers:
         - name: bid-svc
           image: sutkaitis/bid-svc:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: ConnectionStrings__BidDbConnection
               valueFrom:

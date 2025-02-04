@@ -18,6 +18,7 @@ spec:
       containers:
         - name: search-svc
           image: sutkaitis/search-svc:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: ConnectionStrings__MongoDbConnection
               valueFrom:

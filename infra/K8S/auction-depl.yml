@@ -18,6 +18,7 @@ spec:
       containers:
         - name: auction-svc
           image: sutkaitis/auction-svc:latest
+          imagePullPolicy: IfNotPresent
           env:
             - name: ConnectionStrings__DefaultConnection
               valueFrom:
